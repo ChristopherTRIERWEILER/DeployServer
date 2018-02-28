@@ -58,9 +58,7 @@ nginx(){
 # Page de dialog
 OPTION=$(whiptail --title "Menu" --menu "Choix du serveur web" 15 60 4 \
         "1" "Apache2" \
-        "2" "Nginx" \
-        "3" "Manjaro" \
-        "4" "Arch linux"  3>&1 1>&2 2>&3)
+        "2" "Nginx" \ )
 
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
