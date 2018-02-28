@@ -60,12 +60,14 @@ echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \n
         2) Nginx \e[0m"
 read NUM
 
-case $NUM
-in
-        1) echo "\033[1;33mInstallation Apache2 \e[0m" apache2;;
-        2) echo "\033[1;33mInstallation Nginx \e[0m" nginx;;
-        *) echo "\033[1;33mNuméro invalide \e[0m"
-esac
+if ["$NUM" == "1"]
+then
+    apache2
+elif ["$NUM" == "2"]
+then
+    nginx
+else
+    echo -e "\033[1;32mNumero incorrect\e[0m"
 
 #Installation PHP7
 echo -e "\033[1;32mInstallation de PHP 7\e[0m"
