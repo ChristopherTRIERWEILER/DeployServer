@@ -55,22 +55,13 @@ function nginx {
     sudo apt-get install nginx
 }
 echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \e[0m"
-select item in "- Apache2 -" "- Nginx -"
-do
-    for var in $REPLY; do
-        echo "Installation $var : $item"
-        case $REPLY in
-            1) #Appel de la fonction apache2
-                apache2
-                ;;
-            2) #Appel de la fonction nginx
-                nginx
-                ;;
-            *) echo -e "\033[1;31mChoix incorrect\e[0m"
-                ;;
-        esac
-    done
-done
+read NUM
+
+case $NUM in
+        1) apache2;;
+        2) nginx;;
+        *) echo "\033[1;33mNuméro invalide \e[0m"
+esac
 
 #Installation PHP7
 echo -e "\033[1;32mInstallation de PHP 7\e[0m"
