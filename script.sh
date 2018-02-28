@@ -1,6 +1,9 @@
 #!/bin/bash
 #Installation des packets
 echo -e "\033[1;32mInstallation des mise à jour\e[0m"
+sudo apt install apt-transport-https lsb-release ca-certificates
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
 sudo apt-get update && apt-get upgrade
 
 #Installation nano
