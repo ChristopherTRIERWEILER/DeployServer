@@ -67,7 +67,7 @@ read NUM
 if ["$NUM" == "1"] ;
 then
     apache2
-elif [$NUM == "2"] ;
+elif ["$NUM" == "2"] ;
 then
     nginx
 else
