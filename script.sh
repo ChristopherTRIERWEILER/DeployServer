@@ -31,14 +31,14 @@ sudo apt-get install glances
 echo -e "\033[1;32mInstallation du serveur MySQL\e[0m"
 sudo apt-get install mysql-server
 cp -rp /var/lib/mysql /home/mysql_data
-nano /etc/mysql/mysql.conf.d/mysqld.cnf
+#nano /etc/mysql/mysql.conf.d/mysqld.cnf
 sed -i "sl/var/lib/mysqli/home/mysql_data/l*" /etc/mysql/mysql.conf.d/mysqld.cnf
 echo -e "\033[41mRedemarrage des services\e[0m"
 sudo service apparmor reload
 sudo service mysql restart
 
 #Installation apache/nginx
-apache2() {
+function apache2{
     echo -e "\033[1;32mInstallation apache2\e[0m"
     sudo add-apt-repository ppa:ondrej/apache2
     sudo apt-get update
@@ -50,7 +50,7 @@ apache2() {
     a2enmod mpm_prefork proxy proxy_fcgi remoteip reqtimeout rewrite socache_shmcb ssl headers  expires
     systemctl restart apache2
 }
-nginx() {
+function nginx{
     echo -e "\033[1;32mInstallation Nginx\e[0m"
     sudo apt-get install nginx
 }
@@ -60,7 +60,8 @@ echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \n
         2) Nginx \e[0m"
 read NUM
 
-case $NUM in
+case $NUM
+in
         1) echo "\033[1;33mInstallation Apache2 \e[0m" apache2;;
         2) echo "\033[1;33mInstallation Nginx \e[0m" nginx;;
         *) echo "\033[1;33mNuméro invalide \e[0m"
