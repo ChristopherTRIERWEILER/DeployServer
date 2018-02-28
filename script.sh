@@ -38,16 +38,7 @@ sudo service apparmor reload
 sudo service mysql restart
 
 #Installation apache/nginx
-echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \e[0m"
-read NUM
-
-case $NUM in
-        1) echo "\033[1;33mInstallation Apache2 \e[0m" apache2;;
-        2) echo "\033[1;33mInstallation Nginx \e[0m" nginx;;
-        *) echo "\033[1;33mNuméro invalide \e[0m"
-esac
-
-function apache2 {
+apache2() {
     echo -e "\033[1;32mInstallation apache2\e[0m"
     sudo add-apt-repository ppa:ondrej/apache2
     sudo apt-get update
@@ -59,10 +50,21 @@ function apache2 {
     a2enmod mpm_prefork proxy proxy_fcgi remoteip reqtimeout rewrite socache_shmcb ssl headers  expires
     systemctl restart apache2
 }
-function nginx {
+nginx() {
     echo -e "\033[1;32mInstallation Nginx\e[0m"
     sudo apt-get install nginx
 }
+
+echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \n
+        1) Apache2 \n
+        2) Nginx \e[0m"
+read NUM
+
+case $NUM in
+        1) echo "\033[1;33mInstallation Apache2 \e[0m" apache2;;
+        2) echo "\033[1;33mInstallation Nginx \e[0m" nginx;;
+        *) echo "\033[1;33mNuméro invalide \e[0m"
+esac
 
 #Installation PHP7
 echo -e "\033[1;32mInstallation de PHP 7\e[0m"
