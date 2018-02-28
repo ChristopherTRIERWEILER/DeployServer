@@ -64,7 +64,11 @@ OPTION=$(whiptail --title "Menu" --menu "Choix du serveur web" 15 60 4 \
 
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
-    echo "Vous avez choisi le serveur : " $OPTION ;
+    if [ "$OPTION" = 1 ] ; then
+        apache2
+    elif [ "$OPTION" = 2 ] ; then
+        nginx
+    fi
 else
     echo "vous avez annulé"
 fi
