@@ -56,37 +56,16 @@ nginx(){
 }
 
 # Page de dialog
-HEIGHT=15
-WIDTH=40
-CHOICE_HEIGHT=4
-BACKTITLE="Backtitle here"
-TITLE="Title here"
-MENU="Choose one of the following options:"
+OPTION=$(whiptail --title "Menu" --menu "Choix du serveur web" 15 60 4 \
+        "1" "Apache2" \
+        "2" "Nginx" \  3>&1 1>&2 2>&3)
 
-OPTIONS=(1 "Option 1"
-         2 "Option 2"
-         3 "Option 3")
-
-CHOICE=$(dialog --clear \
-                --backtitle "$BACKTITLE" \
-                --title "$TITLE" \
-                --menu "$MENU" \
-                $HEIGHT $WIDTH $CHOICE_HEIGHT \
-                "${OPTIONS[@]}" \
-                2>&1 >/dev/tty)
-
-clear
-case $CHOICE in
-        1)
-            echo "You chose Option 1"
-            ;;
-        2)
-            echo "You chose Option 2"
-            ;;
-        3)
-            echo "You chose Option 3"
-            ;;
-esac
+exitstatus=$?
+if [ $exitstatus = 0 ]; then
+    echo "Vous avez choisi le serveur : " $OPTION ;
+else
+    echo "vous avez annulé"
+fi
 
 #show_menu(){
 #    NORMAL=`echo "\033[m"`
