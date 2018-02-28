@@ -38,7 +38,7 @@ sudo service apparmor reload
 sudo service mysql restart
 
 #Installation apache/nginx
-function apache2{
+apache2(){
     echo -e "\033[1;32mInstallation apache2\e[0m"
     sudo add-apt-repository ppa:ondrej/apache2
     sudo apt-get update
@@ -50,7 +50,7 @@ function apache2{
     a2enmod mpm_prefork proxy proxy_fcgi remoteip reqtimeout rewrite socache_shmcb ssl headers  expires
     systemctl restart apache2
 }
-function nginx{
+nginx(){
     echo -e "\033[1;32mInstallation Nginx\e[0m"
     sudo apt-get install nginx
 }
