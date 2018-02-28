@@ -38,13 +38,22 @@ sudo service apparmor reload
 sudo service mysql restart
 
 #Installation apache/nginx
+echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \e[0m"
+read NUM
+
+case $NUM in
+        1) echo "\033[1;33mInstallation Apache2 \e[0m" apache2;;
+        2) echo "\033[1;33mInstallation Nginx \e[0m" nginx;;
+        *) echo "\033[1;33mNuméro invalide \e[0m"
+esac
+
 function apache2 {
     echo -e "\033[1;32mInstallation apache2\e[0m"
     sudo add-apt-repository ppa:ondrej/apache2
     sudo apt-get update
     sudo apt-get install apache2
     nano /etc/apache2/apache2.conf
-    LogFormat "%h %l %u %t \"%r\" %>s %O %T sec \"%{Referer}i\" \"%{User-Agent}i\"" combinedspeed 
+    LogFormat "%h %l %u %t \"%r\" %>s %O %T sec \"%{Referer}i\" \"%{User-Agent}i\"" combinedspeed
     LogFormat "%a %l %u %t \"%r\" %>s %O %T sec \"%{Referer}i\" \"%{User-Agent}i\"" combinedspeedLB
     a2dismod -f mpm_event auth_basic
     a2enmod mpm_prefork proxy proxy_fcgi remoteip reqtimeout rewrite socache_shmcb ssl headers  expires
@@ -54,14 +63,6 @@ function nginx {
     echo -e "\033[1;32mInstallation Nginx\e[0m"
     sudo apt-get install nginx
 }
-echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \e[0m"
-read NUM
-
-case $NUM in
-        1) apache2;;
-        2) nginx;;
-        *) echo "\033[1;33mNuméro invalide \e[0m"
-esac
 
 #Installation PHP7
 echo -e "\033[1;32mInstallation de PHP 7\e[0m"
