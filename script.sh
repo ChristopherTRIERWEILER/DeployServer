@@ -60,10 +60,10 @@ echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \n
         "2") Nginx \e[0m"
 read NUM
 
-if ["$NUM" == 1] ;
+if [$NUM == 1] ;
 then
     apache2
-elif ["$NUM" == 2] ;
+elif [$NUM == 2] ;
 then
     nginx
 else
