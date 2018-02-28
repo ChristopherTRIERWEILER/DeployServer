@@ -64,16 +64,13 @@ show_menu(){
     RED_TEXT=`echo "\033[31m"`
     ENTER_LINE=`echo "\033[33m"`
     echo -e "${MENU}*********************************************${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 1)${MENU} Mount dropbox ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 2)${MENU} Mount USB 500 Gig Drive ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 3)${MENU} Restart Apache ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 4)${MENU} ssh Frost TomCat Server ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 5)${MENU} ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 1)${MENU} Installation Apache2 ${NORMAL}"
+    echo -e "${MENU}**${NUMBER} 2)${MENU} Installation Nginx ${NORMAL}"
     echo -e "${MENU}*********************************************${NORMAL}"
     echo -e "${ENTER_LINE}Please enter a menu option and enter or ${RED_TEXT}enter to exit. ${NORMAL}"
     read opt
 }
-function option_picked() {
+option_picked() {
     COLOR='\033[01;31m' # bold red
     RESET='\033[00;00m' # normal white
     MESSAGE=${@:-"${RESET}Error: No message passed"}
@@ -90,13 +87,13 @@ while [ opt != '' ]
         case $opt in
         1) clear;
             option_picked "Apache2";
-            sudo apache2
+            apache2
         menu;
         ;;
 
         2) clear;
             option_picked "Nginx";
-            sudo nginx
+            nginx
         menu;
             ;;
 
