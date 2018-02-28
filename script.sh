@@ -56,60 +56,92 @@ nginx(){
 }
 
 # Page de dialog
-show_menu(){
-    NORMAL=`echo "\033[m"`
-    MENU=`echo "\033[36m"` #Blue
-    NUMBER=`echo "\033[33m"` #yellow
-    FGRED=`echo "\033[41m"`
-    RED_TEXT=`echo "\033[31m"`
-    ENTER_LINE=`echo "\033[33m"`
-    echo -e "${MENU}*********************************************${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 1)${MENU} Installation Apache2 ${NORMAL}"
-    echo -e "${MENU}**${NUMBER} 2)${MENU} Installation Nginx ${NORMAL}"
-    echo -e "${MENU}*********************************************${NORMAL}"
-    echo -e "${ENTER_LINE}Please enter a menu option and enter or ${RED_TEXT}enter to exit. ${NORMAL}"
-    read opt
-}
-option_picked() {
-    COLOR='\033[01;31m' # bold red
-    RESET='\033[00;00m' # normal white
-    MESSAGE=${@:-"${RESET}Error: No message passed"}
-    echo -e "${COLOR}${MESSAGE}${RESET}"
-}
+HEIGHT=15
+WIDTH=40
+CHOICE_HEIGHT=4
+BACKTITLE="Backtitle here"
+TITLE="Title here"
+MENU="Choose one of the following options:"
+
+OPTIONS=(1 "Option 1"
+         2 "Option 2"
+         3 "Option 3")
+
+CHOICE=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$TITLE" \
+                --menu "$MENU" \
+                $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                "${OPTIONS[@]}" \
+                2>&1 >/dev/tty)
 
 clear
-show_menu
-while [ opt != '' ]
-    do
-    if [[ $opt = "" ]]; then
-            exit;
-    else
-        case $opt in
-        1) clear;
-            option_picked "Apache2";
-            apache2
-        menu;
-        ;;
-
-        2) clear;
-            option_picked "Nginx";
-            nginx
-        menu;
+case $CHOICE in
+        1)
+            echo "You chose Option 1"
             ;;
+        2)
+            echo "You chose Option 2"
+            ;;
+        3)
+            echo "You chose Option 3"
+            ;;
+esac
 
-        x)exit;
-        ;;
-
-        \n)exit;
-        ;;
-
-        *)clear;
-        option_picked "Pick an option from the menu";
-        show_menu;
-        ;;
-    esac
-fi
-done
+#show_menu(){
+#    NORMAL=`echo "\033[m"`
+#    MENU=`echo "\033[36m"` #Blue
+#    NUMBER=`echo "\033[33m"` #yellow
+#    FGRED=`echo "\033[41m"`
+#    RED_TEXT=`echo "\033[31m"`
+#    ENTER_LINE=`echo "\033[33m"`
+#    echo -e "${MENU}*********************************************${NORMAL}"
+#    echo -e "${MENU}**${NUMBER} 1)${MENU} Installation Apache2 ${NORMAL}"
+#    echo -e "${MENU}**${NUMBER} 2)${MENU} Installation Nginx ${NORMAL}"
+#    echo -e "${MENU}*********************************************${NORMAL}"
+#    echo -e "${ENTER_LINE}Please enter a menu option and enter or ${RED_TEXT}enter to exit. ${NORMAL}"
+#    read opt
+#}
+#option_picked() {
+#    COLOR='\033[01;31m' # bold red
+#    RESET='\033[00;00m' # normal white
+#    MESSAGE=${@:-"${RESET}Error: No message passed"}
+#    echo -e "${COLOR}${MESSAGE}${RESET}"
+#}
+#
+#clear
+#show_menu
+#while [ opt != '' ]
+#    do
+#    if [[ $opt = "" ]]; then
+#            exit;
+#    else
+#        case $opt in
+#        1) clear;
+#            option_picked "Apache2";
+#            apache2
+#        menu;
+#        ;;
+#
+#        2) clear;
+#            option_picked "Nginx";
+#            nginx
+#        menu;
+#            ;;
+#
+#        x)exit;
+#        ;;
+#
+#        \n)exit;
+#        ;;
+#
+#        *)clear;
+#        option_picked "Pick an option from the menu";
+#        show_menu;
+#        ;;
+#    esac
+#fi
+#done
 
 #Installation PHP7
 echo -e "\033[1;32mInstallation de PHP 7\e[0m"
