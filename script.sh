@@ -67,7 +67,8 @@ elif ["$NUM" == "2"]
 then
     nginx
 else
-    echo -e "\033[1;32mNumero incorrect\e[0m"
+    echo -e "\033[1;32mNumero incorrect [${NUM}]\e[0m"
+fi
 
 #Installation PHP7
 echo -e "\033[1;32mInstallation de PHP 7\e[0m"
