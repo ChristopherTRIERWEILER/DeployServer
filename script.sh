@@ -55,24 +55,37 @@ nginx(){
     sudo apt-get install nginx
 }
 
-echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \n
-        1) Apache2 \n
-        2) Nginx \e[0m"
+# Page de dialog
+HEIGHT=15
+WIDTH=40
+CHOICE_HEIGHT=4
+BACKTITLE="Backtitle here"
+TITLE="Title here"
+MENU="Choose one of the following options:"
 
-APACHE2="1"
-NGINX="2"
+OPTIONS=(1 "Apache2"
+         2 "Nginx")
 
-read NUM
+CHOICE=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$TITLE" \
+                --menu "$MENU" \
+                $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                "${OPTIONS[@]}" \
+                2>&1 >/dev/tty)
 
-if ["$NUM" == "1"] ;
-then
-    apache2
-elif ["$NUM" == "2"] ;
-then
-    nginx
-else
-    echo -e "\033[1;32mNumero incorrect [${NUM}]\e[0m"
-fi
+clear
+case $CHOICE in
+        1)
+            echo "You chose Option 1"
+            ;;
+        2)
+            echo "You chose Option 2"
+            ;;
+        3)
+            echo "You chose Option 3"
+            ;;
+esac
 
 #Installation PHP7
 echo -e "\033[1;32mInstallation de PHP 7\e[0m"
