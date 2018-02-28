@@ -59,8 +59,8 @@ echo -e "\033[1;33mEntrez votre choix de serveur (Apache2/Nginx): \n
         1) Apache2 \n
         2) Nginx \e[0m"
 
-APACHE2 = "1"
-NGINX = "2"
+APACHE2="1"
+NGINX="2"
 
 read NUM
 
